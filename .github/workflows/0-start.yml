@@ -29,9 +29,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GLOBAL_CLASSROOM_ORG_TOKEN }}
-          persist-credentials: true
       - id: get_step
         run: |
           echo "current_step=$(cat ./.github/script/STEP)" >> $GITHUB_OUTPUT
