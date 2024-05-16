@@ -12,14 +12,6 @@ on:
     branches:
       - main
 
-# Reference https://docs.github.com/en/actions/security-guides/automatic-token-authentication
-permissions:
-  # Need `contents: read` to checkout the repository
-  # Need `contents: write` to update the step metadata
-  # Need `pull-requests: write` to create a pull request
-  contents: write
-  pull-requests: write
-
 jobs:
   # Get the current step from .github/script/STEP so we can
   # limit running the main job when the learner is on the same step.
@@ -29,6 +21,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GLOBAL_CLASSROOM_ORG_TOKEN }}
+          persist-credentials: true
       - id: get_step
         run: |
           echo "current_step=$(cat ./.github/script/STEP)" >> $GITHUB_OUTPUT
