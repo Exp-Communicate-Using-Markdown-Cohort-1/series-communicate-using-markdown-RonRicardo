@@ -29,6 +29,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GLOBAL_CLASSROOM_ORG_TOKEN }}
       - id: get_step
         run: |
           echo "current_step=$(cat ./.github/script/STEP)" >> $GITHUB_OUTPUT
@@ -57,7 +59,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GLOBAL_CLASSROOM_ORG_TOKEN }}
-          persist-credentials: true
           fetch-depth: 0 # Let's get all the branches
 
       # Make a branch, file, commit, and pull request for the learner
